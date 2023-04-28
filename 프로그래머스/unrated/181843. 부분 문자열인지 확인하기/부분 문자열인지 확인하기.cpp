@@ -5,6 +5,7 @@ using namespace std;
 
 int solution(string my_string, string target) {
     int answer = 0;
+    /*
     if (my_string.size() < target.size())
         return answer = 0;
     
@@ -22,5 +23,10 @@ int solution(string my_string, string target) {
         else if(answer == 1)
             break;
     }
+    */
+    
+    //string.find()이용한 답
+    if(my_string.find(target) != string::npos) answer = 1;
+    else answer = 0;
     return answer;
 }
