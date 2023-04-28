@@ -6,10 +6,21 @@ using namespace std;
 
 int solution(vector<int> numbers) {
     int answer = 0;
+    int max1 = 0;
+    int max2 = 0;
+    //수정 전
+    /*
     sort(numbers.begin(),numbers.end());
-    int max1 = numbers.back();
+    max1 = numbers.back();
     numbers.pop_back();
-    int max2 = numbers.back();
+    max2 = numbers.back();
     answer = max1 * max2;
-    return answer;
+    */
+    
+    //수정 후
+    sort(numbers.begin(),numbers.end());
+    max1 = numbers[numbers.size()-1];
+    max2 = numbers[numbers.size()-2];
+    
+    return answer = max1 * max2;
 }
