@@ -18,5 +18,7 @@ vector<int> solution(vector<int> numbers, string direction) {
         for(int i = 0; i < numbers.size()-1; i++)
             swap(numbers[i],numbers[i+1]);
     }
+    
+    //algorithm에 rotate라는 함수가 있음
     return numbers;
 }
