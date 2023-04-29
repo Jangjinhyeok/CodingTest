@@ -9,6 +9,7 @@ vector<int> solution(string my_string) {
     for(auto i : my_string)
     {
         if(i > 47 && i < 58)
+            //i - '0' >> char to int
             answer.push_back(i - 48);
     }
     sort(answer.begin(),answer.end());
