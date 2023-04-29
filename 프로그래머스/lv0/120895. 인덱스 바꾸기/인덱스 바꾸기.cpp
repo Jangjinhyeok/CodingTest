@@ -19,5 +19,7 @@ string solution(string my_string, int num1, int num2) {
             answer.push_back(my_string[i]);
     }
     
+    //algorithm에 swap함수가 있으니 그걸 써도 됨
+    
     return answer;
 }
