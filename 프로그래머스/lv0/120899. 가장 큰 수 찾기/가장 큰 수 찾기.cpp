@@ -17,5 +17,6 @@ vector<int> solution(vector<int> array) {
     }
     answer.push_back(max_num);
     answer.push_back(max_num_idx);
+    //algorithm에 원하는 원소의 인덱스를 알려주는 distance(arr.begin(), num) 함수가 있음
     return answer;
 }
