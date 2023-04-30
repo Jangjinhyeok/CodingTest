@@ -24,5 +24,7 @@ int solution(string my_string, string is_prefix) {
             break;
         }
     
+    //return my_string.substr(0, is_prefix.size()) == is_prefix; 이거 한줄이면 되더라
+
     return answer;
 }
