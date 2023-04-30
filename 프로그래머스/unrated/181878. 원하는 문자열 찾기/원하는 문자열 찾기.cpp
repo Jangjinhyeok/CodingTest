@@ -18,5 +18,7 @@ int solution(string myString, string pat) {
     
     if(lower_str.find(lower_pat) != string::npos)
         answer = 1;
+    
+    //transform 함수 사용
     return answer;
 }
