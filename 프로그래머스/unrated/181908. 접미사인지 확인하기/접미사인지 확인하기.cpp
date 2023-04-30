@@ -27,5 +27,7 @@ int solution(string my_string, string is_suffix) {
         if (i == is_suffix)
             answer = 1;
     }
+    
+    //substr() 사용해서 좀 더 줄여볼 것
     return answer;
 }
