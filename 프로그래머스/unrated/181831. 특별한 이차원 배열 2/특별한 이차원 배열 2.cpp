@@ -7,7 +7,7 @@ int solution(vector<vector<int>> arr) {
     int answer = 1;
     for (int i = 0; i < arr.size(); i++)
     {
-        for (int j = 0; j < arr.size(); j++)
+        for (int j = 0; j < i; j++)
         {
             if (i == j)
                 continue;
