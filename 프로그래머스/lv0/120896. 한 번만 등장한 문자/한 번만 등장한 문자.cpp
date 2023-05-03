@@ -36,5 +36,7 @@ string solution(string s) {
     //sort된 s에서 마지막에 중복인데 삭제를 못해서 추가한코드 
     if (is_in)
         answer.pop_back();
+    
+    //map쓸줄 알면 개편함 ㅆㅂ
     return answer;
 }
