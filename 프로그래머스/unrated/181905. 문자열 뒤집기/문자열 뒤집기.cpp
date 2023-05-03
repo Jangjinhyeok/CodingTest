@@ -18,5 +18,6 @@ string solution(string my_string, int s, int e) {
         else if (i > e)
             answer.push_back(my_string[i]);
     }
+    //reverse 쓸걸 그랬네 ㅅㅂ
     return answer;
 }
