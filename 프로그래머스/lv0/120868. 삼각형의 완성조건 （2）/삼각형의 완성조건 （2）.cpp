@@ -18,5 +18,8 @@ int solution(vector<int> sides) {
     for(int i = sides[1]+1; i < sides[0]+sides[1]; i++)
         answer++;
     
+    
+    //싯팔 공식이 있었네
+    //가장 작은 수 * 2 - 1
     return answer;
 }
