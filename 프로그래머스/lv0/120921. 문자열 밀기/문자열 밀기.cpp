@@ -33,6 +33,8 @@ int solution(string A, string B) {
     }
     */
     
+    //참고로 rotate도 있음
+    
     //미친 정답
     B += B;
     int answer = B.find(A);
