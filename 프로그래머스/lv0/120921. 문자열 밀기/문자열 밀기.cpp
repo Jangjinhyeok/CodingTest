@@ -4,6 +4,7 @@
 using namespace std;
 
 int solution(string A, string B) {
+    /*
     int answer = -1;
     if (A == B)
         return answer = 0;
@@ -30,7 +31,11 @@ int solution(string A, string B) {
         }
         temp2 = temp;
     }
+    */
     
+    //미친 정답
+    B += B;
+    int answer = B.find(A);
     
     return answer;
 }
