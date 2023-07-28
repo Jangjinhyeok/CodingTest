@@ -15,15 +15,20 @@ vector<vector<int>> solution(int n) {
 	bool colChange = false;
 	bool rowChange = true;
 
+    //answer 초기화
 	for (int i = 0; i < n; i++)
 		temp.emplace_back(0);
 	for (int i = 0; i < n; i++)
 		answer.emplace_back(temp);
+    
+    //규칙상 n번을 1번 진행 후 n-1, n-2 ... 1을 총 두번 진행 하기에
+    //1번 진행되는 n번을 따로 진행
 	for (int i = 0; i < n; i++)
 	{
 		answer[0][i] = number;
 		number++;
 	}
+
 
 	for (int i = 0; i < n - 1; i++)
 	{
