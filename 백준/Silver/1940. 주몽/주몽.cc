@@ -1,11 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <numeric>
 using namespace std;
 
 int n, m, answer;
 vector<int> number;
-vector<int> c;
 
 int main()
 {    
