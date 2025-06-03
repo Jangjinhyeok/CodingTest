@@ -2,9 +2,9 @@
 using namespace std;
 int main()
 {
-    int a, b;
+    long long a, b;
     cin >> a >> b;
-    int answer = (a + b) * (a - b);
-    cout << answer;
+    long long answer = (a + b) * (a - b);
+    cout << answer << endl;
     return 0;
 }
