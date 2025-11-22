@@ -1,64 +1,63 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <queue>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-//방향벡터
-int dy[4] = { -1, 0, 1, 0 };
-int dx[4] = { 0, 1, 0, -1 };
-int n, m;
-//맵
-int a[104][104];
-//방문여부
-int visited[104][104];
+int dy[4] = {-1, 0, 1, 0};
+int dx[4] = {0, 1, 0, -1};
 
-void BFS(int y, int x) 
+// 전역 변수인 배열은 자동으로 0 초기화
+int visited[101][101];
+int dist[101][101];
+
+void BFS(int maze[101][101], int n, int m)
 {
-	queue<pair<int,int>> q;
-	visited[y][x] = 1;
-	q.push(make_pair(y, x));
-	while(q.size())
+	// 방문 처리
+	visited[0][0] = 1;
+	dist[0][0] = 1;
+
+	queue<pair<int, int>> q;
+	q.push({ 0, 0 });
+
+	while (!q.empty())
 	{
-		pair<int, int> here = q.front();
+		int y = q.front().first;
+		int x = q.front().second;
 		q.pop();
+
 		for (int i = 0; i < 4; i++)
 		{
-			int ny = here.first + dy[i];
-			int nx = here.second + dx[i];
+			int ny = y + dy[i];
+			int nx = x + dx[i];
 
-			if (ny > n || ny < 0 || nx > m || nx < 0)continue;
-			if (visited[ny][nx] < 1 && a[ny][nx] == 1)
-			{
-				visited[ny][nx] = visited[here.first][here.second] + 1;
-				q.push(make_pair(ny, nx));
-			}
+			if (ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
+
+			if (maze[ny][nx] == 0) continue;
+
+			if (visited[ny][nx] == 1) continue;
+
+			dist[ny][nx] = dist[y][x] + 1;
+			visited[ny][nx] = 1;
+			q.push({ ny,nx });
 		}
 	}
-	return;
 }
-int main() 
+
+int main()
 {
-	cin.tie(NULL);
-	cout.tie(NULL);
+	int n, m;
 	cin >> n >> m;
-	int destY = n;
-	int destX = m;
+	int maze[101][101];
 
-	for (int i = 0; i < n; i++) 
+	for (int i = 0; i < n; i++)
 	{
-		string temp;
-        cin >> temp;
-
-		for (int j = 0; j < temp.size(); j++) 
+		string s;
+		cin >> s;
+		for (int j = 0; j < m; j++)
 		{
-			a[i][j] = temp[j] - '0';
+			maze[i][j] = s[j] - '0'; // '0' 또는 '1'을 정수 0/1로 변환
 		}
 	}
-	
-	BFS(0,0);
-	cout << visited[destY-1][destX-1];
+
+	BFS(maze, n, m);
+	cout << dist[n - 1][m - 1];
 	return 0;
 }
