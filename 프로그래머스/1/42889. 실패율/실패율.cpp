@@ -2,67 +2,57 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <algorithm>
 using namespace std;
 
-vector<int> solution(int N, vector<int> stages) {
+vector<int> solution(int N, vector<int> stages) 
+{
     vector<int> answer;
-    map<int, int>data;
-    map<int, float> failRatio;
-    vector<int> challanger;
     
-    for (int i = 1; i <= N; i++)
+    // 1. 각 스테이지에 "머무는" 사람 수 카운트
+    int stageStay[502] = {0}; // 1 ~ N, N+1까지 쓸 수 있게 넉넉하게
+    for (int s : stages)
     {
-        challanger.push_back(0);
-        data.insert(pair<int, int>(i, 0));
+        if (s <= N) // N+1은 전부 클리어 상태라 실패율 계산에선 제외
+        {
+            stageStay[s]++;
+        }
     }
-
-    //각 스테이지별 도전자수와 클리어유저수 저장
-    for (int i = 0; i < stages.size(); i++)
+    
+    // 2. 실패율 계산
+    int totalPlayers = stages.size();
+    vector<pair<double, int>> fail; // {실패율, 스테이지 번호}
+    
+    for (int stage = 1; stage <= N; stage++)
     {
-        if (data.find(stages[i]) == data.end())
-            for (int j = 1; j <= N; j++)
-            {
-                challanger[j - 1]++;
-                data.at(j)++;
-            }
+        if (totalPlayers == 0)
+        {
+            // 도전자 자체가 없으면 실패율 0
+            fail.push_back({0.0, stage});
+        }
         else
         {
-            for (int j = 1; j < stages[i]; j++)
-                data.at(j)++;
-            for (int j = 0; j < stages[i]; j++)
-                challanger[j]++;
+            double rate = (double)stageStay[stage] / (double)totalPlayers;
+            fail.push_back({rate, stage});
         }
+        
+        // 이 스테이지에서 실패한 사람들은 다음 스테이지 도전자에서 제외
+        totalPlayers -= stageStay[stage];
     }
     
-    //실패율저장
-    for (int i = 0; i < challanger.size(); i++)
-    {
-        float fail = (float)(challanger[i]-data.at(i + 1)) / (float)challanger[i];
-        failRatio.insert(pair<int, float>(i + 1, fail));
-    }
-    
-    //실패율이 적은 순서대로 answer에 넣기
-    while (!failRatio.empty())
-    {
-        pair<int,float> temp = *failRatio.begin();
-        for (auto iter = failRatio.begin(); iter != failRatio.end(); iter++)
+    // 3. 실패율 정렬
+    sort(fail.begin(), fail.end(), [](const pair<double,  int>& a, const pair<double, int>& b){
+        if(a.first == b.first)
         {
-            if (iter == failRatio.begin())
-                continue;
-
-            if (temp.second < iter->second)
-            {
-                temp.first = iter->first;
-                temp.second = iter->second;
-            }
-            else if (temp.second == iter->second)
-            {
-                if (temp.first < iter->first)
-                    continue;
-            }
+            return a.second < b.second;
         }
-        answer.push_back(temp.first);
-        failRatio.erase(temp.first);
+        return a.first > b.first;
+    });
+    
+    for (auto& p : fail)
+    {
+        answer.push_back(p.second);
     }
+    
     return answer;
 }
