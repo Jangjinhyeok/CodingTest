@@ -4,35 +4,41 @@
 
 using namespace std;
 
-vector<int> solution(vector<int> progresses, vector<int> speeds) {
+vector<int> solution(vector<int> progresses, vector<int> speeds) 
+{
     vector<int> answer;
     queue<int> q;
-    for(auto i : progresses)
-        q.push(i);
+    int completeTask = 0;
     
-    
-    int count = 0;
-    int total_end = 0;
-    while(!q.empty())
+    for(int i : progresses)
     {
-        while(progresses[total_end] < 100)
-        {
-            if(count > 0)
-            {
-                answer.emplace_back(count);
-                count = 0;
-            }
-            
-            for(int i = 0 + total_end; i < speeds.size(); i++)
-                progresses[i] += speeds[i];
-        }
-        q.pop();
-        count++;
-        total_end++;
+        q.push(i);
     }
     
-    if(count > 0)
-        answer.emplace_back(count);
+    while(!q.empty())
+    {
+        int tasks = 0;
+        for(int i = 0; i < q.size(); i++)
+        {
+            int temp = q.front();
+            q.pop();
+            
+            temp += speeds[completeTask + i];
+            q.push(temp);
+        }
+        
+        while(q.front() >= 100 && !q.empty())
+        {
+            tasks++;
+            completeTask++;
+            q.pop();
+        }
+        
+        if(tasks != 0)
+        {
+            answer.push_back(tasks);
+        }
+    }
     
     return answer;
 }
