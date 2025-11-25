@@ -1,33 +1,32 @@
-#include <string>
-#include <iostream>
-#include <stack>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 bool solution(string s)
 {
-    bool answer = false;
-    stack<char> open;
-    stack<char> close;
-    for(auto c : s)
+    stack<char> container;
+    
+    for(char c : s)
     {
         if(c == '(')
-            open.push(c);
+        {
+            container.push(c);
+        }
         else if(c == ')')
         {
-            if(open.empty())
-                close.push(c);
+            if(container.empty())
+            {
+                return false;
+            }
             else
-                open.pop();
+            {
+                container.pop();
+            }
         }
     }
     
-    if(open.empty() && close.empty())
-        answer = true;
+    if(!container.empty())
+        return false;
     
-    if(answer)
-        cout << "True" << endl;
-    else
-        cout << "False" << endl;
-    return answer;
+    return true;
 }
